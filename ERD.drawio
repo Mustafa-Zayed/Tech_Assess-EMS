@@ -1,0 +1,142 @@
+<mxfile host="app.diagrams.net" agent="drawio">
+  <diagram id="erd" name="ERD">
+    <mxGraphModel dx="2975" dy="532" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="entDept" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=14;fontStyle=1;" value="Department" vertex="1">
+          <mxGeometry height="50" width="160" x="710" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="entEmp" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=14;fontStyle=1;" value="Employee" vertex="1">
+          <mxGeometry height="50" width="160" x="150" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="entProj" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=14;fontStyle=1;" value="Project" vertex="1">
+          <mxGeometry height="50" width="160" x="1300" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="relEmploys" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=13;" value="Employs" vertex="1">
+          <mxGeometry height="90" width="140" x="380" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="relOwns" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=13;" value="Owns" vertex="1">
+          <mxGeometry height="90" width="140" x="1040" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="relWorksOn" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=13;" value="WorksOn" vertex="1">
+          <mxGeometry height="90" width="140" x="745" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="attrRole" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" value="role" vertex="1">
+          <mxGeometry height="50" width="120" x="755" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="lineRole" edge="1" parent="1" source="relWorksOn" style="endArrow=none;html=1;strokeColor=#000000;" target="attrRole">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="attrDeptId" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" value="&lt;u&gt;id&lt;/u&gt;" vertex="1">
+          <mxGeometry height="50" width="120" x="520" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="attrDeptName" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" value="name" vertex="1">
+          <mxGeometry height="50" width="120" x="660" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="attrDeptLocation" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" value="location" vertex="1">
+          <mxGeometry height="50" width="120" x="800" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="attrDeptBudget" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" value="budget" vertex="1">
+          <mxGeometry height="50" width="120" x="940" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lineDeptId" edge="1" parent="1" source="attrDeptId" style="endArrow=none;html=1;strokeColor=#000000;" target="entDept">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lineDeptName" edge="1" parent="1" source="attrDeptName" style="endArrow=none;html=1;strokeColor=#000000;" target="entDept">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lineDeptLocation" edge="1" parent="1" source="attrDeptLocation" style="endArrow=none;html=1;strokeColor=#000000;" target="entDept">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lineDeptBudget" edge="1" parent="1" source="attrDeptBudget" style="endArrow=none;html=1;strokeColor=#000000;" target="entDept">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="attrEmpId" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" value="&lt;u&gt;id&lt;/u&gt;" vertex="1">
+          <mxGeometry height="50" width="120" x="-140" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="attrEmpName" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" value="name" vertex="1">
+          <mxGeometry height="50" width="120" x="-10" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="attrEmpEmail" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" value="email" vertex="1">
+          <mxGeometry height="50" width="120" x="120" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="attrEmpPhone" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" value="phone" vertex="1">
+          <mxGeometry height="50" width="120" x="250" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="attrEmpHireDate" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" value="hireDate" vertex="1">
+          <mxGeometry height="50" width="120" x="380" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="attrEmpSalary" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" value="salary" vertex="1">
+          <mxGeometry height="50" width="120" x="510" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="lineEmpId" edge="1" parent="1" source="attrEmpId" style="endArrow=none;html=1;strokeColor=#000000;" target="entEmp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lineEmpName" edge="1" parent="1" source="attrEmpName" style="endArrow=none;html=1;strokeColor=#000000;" target="entEmp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lineEmpEmail" edge="1" parent="1" source="attrEmpEmail" style="endArrow=none;html=1;strokeColor=#000000;" target="entEmp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lineEmpPhone" edge="1" parent="1" source="attrEmpPhone" style="endArrow=none;html=1;strokeColor=#000000;" target="entEmp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lineEmpHireDate" edge="1" parent="1" source="attrEmpHireDate" style="endArrow=none;html=1;strokeColor=#000000;" target="entEmp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lineEmpSalary" edge="1" parent="1" source="attrEmpSalary" style="endArrow=none;html=1;strokeColor=#000000;" target="entEmp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="attrProjId" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" value="&lt;u&gt;id&lt;/u&gt;" vertex="1">
+          <mxGeometry height="50" width="120" x="1120" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="attrProjName" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" value="name" vertex="1">
+          <mxGeometry height="50" width="120" x="1250" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="attrProjDescription" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" value="description" vertex="1">
+          <mxGeometry height="50" width="120" x="1380" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="attrProjStartDate" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" value="startDate" vertex="1">
+          <mxGeometry height="50" width="120" x="1510" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="attrProjEndDate" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" value="endDate" vertex="1">
+          <mxGeometry height="50" width="120" x="1640" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="lineProjId" edge="1" parent="1" source="attrProjId" style="endArrow=none;html=1;strokeColor=#000000;" target="entProj">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lineProjName" edge="1" parent="1" source="attrProjName" style="endArrow=none;html=1;strokeColor=#000000;" target="entProj">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lineProjDescription" edge="1" parent="1" source="attrProjDescription" style="endArrow=none;html=1;strokeColor=#000000;" target="entProj">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lineProjStartDate" edge="1" parent="1" source="attrProjStartDate" style="endArrow=none;html=1;strokeColor=#000000;" target="entProj">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lineProjEndDate" edge="1" parent="1" source="attrProjEndDate" style="endArrow=none;html=1;strokeColor=#000000;" target="entProj">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="connDeptEmploys" edge="1" parent="1" source="entDept" style="endArrow=none;html=1;strokeColor=#000000;fontSize=13;" target="relEmploys" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="connEmploysEmp" edge="1" parent="1" source="relEmploys" style="endArrow=none;html=1;strokeColor=#000000;fontSize=13;" target="entEmp" value="N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="connDeptOwns" edge="1" parent="1" source="entDept" style="endArrow=none;html=1;strokeColor=#000000;fontSize=13;" target="relOwns" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="connOwnsProj" edge="1" parent="1" source="relOwns" style="endArrow=none;html=1;strokeColor=#000000;fontSize=13;" target="entProj" value="N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="connEmpWorksOn" edge="1" parent="1" source="entEmp" style="endArrow=none;html=1;strokeColor=#000000;fontSize=13;" target="relWorksOn" value="M">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="connWorksOnProj" edge="1" parent="1" source="relWorksOn" style="endArrow=none;html=1;strokeColor=#000000;fontSize=13;" target="entProj" value="N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
