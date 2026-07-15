@@ -1,4 +1,4 @@
-package com.ds_middle_east.backend.empolyee.entity;
+package com.ds_middle_east.backend.employee.entity;
 
 import com.ds_middle_east.backend.department.entity.Department;
 import com.ds_middle_east.backend.employee_project.entity.EmployeeProject;

@@ -1,6 +1,6 @@
 package com.ds_middle_east.backend.employee_project.entity;
 
-import com.ds_middle_east.backend.empolyee.entity.Employee;
+import com.ds_middle_east.backend.employee.entity.Employee;
 import com.ds_middle_east.backend.project.entity.Project;
 import jakarta.persistence.*;
 import lombok.*;
