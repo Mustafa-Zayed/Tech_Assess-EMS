@@ -43,4 +43,9 @@ public class EmployeeDTO {
 
     @NotNull(message = "Department is required")
     private Long departmentId;
+
+    // better to include in the response rather than departmentId,
+    // so that Angular can see the department name directly
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private String departmentName;
 }

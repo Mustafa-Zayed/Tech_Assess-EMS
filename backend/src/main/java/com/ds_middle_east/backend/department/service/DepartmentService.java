@@ -53,6 +53,7 @@ public class DepartmentService {
         department.setBudget(dto.getBudget());
 
         Department savedDepartment = departmentRepository.save(department);
+        log.info("Department has been updated successfully");
 
         DepartmentDTO map = modelMapper.map(savedDepartment, DepartmentDTO.class);
 
