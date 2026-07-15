@@ -37,4 +37,7 @@ public class ProjectDTO {
 
     @NotNull(message = "Department is required")
     private Long departmentId;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private String departmentName;
 }
