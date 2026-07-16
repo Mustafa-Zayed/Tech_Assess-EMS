@@ -72,7 +72,7 @@ public class EmployeeProjectService {
         employeeProjectDTO.setProjectName(project.getName());
 
         return Response.<EmployeeProjectDTO>builder()
-                .statusCode(200)
+                .statusCode(201)
                 .message("Employee assigned to project successfully")
                 .data(employeeProjectDTO)
                 .build();
