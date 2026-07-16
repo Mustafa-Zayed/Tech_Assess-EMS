@@ -1,0 +1,1129 @@
+{
+  "info": {
+    "_postman_id": "6b5e0228-0c45-4b31-929b-2a41c2628d8a",
+    "name": "Tech_Assess-EMS",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "29260451"
+  },
+  "item": [
+    {
+      "name": "departments",
+      "item": [
+        {
+          "name": "Validation Tests",
+          "item": [
+            {
+              "name": "Empty name",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"\",\r\n  \"location\": \"Cairo\",\r\n  \"budget\": 500000\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{api_url}}:{{api_port}}/api/v1/departments",
+                  "host": [
+                    "{{api_url}}"
+                  ],
+                  "port": "{{api_port}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "departments"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Empty location",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Finance\",\r\n  \"location\": \"\",\r\n  \"budget\": 700000\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{api_url}}:{{api_port}}/api/v1/departments",
+                  "host": [
+                    "{{api_url}}"
+                  ],
+                  "port": "{{api_port}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "departments"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Negative budget",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"IT\",\r\n  \"location\": \"Cairo\",\r\n  \"budget\": -1000\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{api_url}}:{{api_port}}/api/v1/departments",
+                  "host": [
+                    "{{api_url}}"
+                  ],
+                  "port": "{{api_port}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "departments"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Zero budget",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"IT\",\r\n  \"location\": \"Cairo\",\r\n  \"budget\": 0\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{api_url}}:{{api_port}}/api/v1/departments",
+                  "host": [
+                    "{{api_url}}"
+                  ],
+                  "port": "{{api_port}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "departments"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Missing required fields",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"budget\": 1000000\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{api_url}}:{{api_port}}/api/v1/departments",
+                  "host": [
+                    "{{api_url}}"
+                  ],
+                  "port": "{{api_port}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "departments"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "createDepartment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Marketing\",\r\n  \"location\": \"New Cairo\",\r\n  \"budget\": 650000\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/departments",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "departments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateDepartment",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Human Resources\",\r\n    \"location\": \"Alexandria\",\r\n    \"budget\": 470000.0\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/departments/2",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "departments",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getDepartmentById",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/departments/2",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "departments",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getAllDepartments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/departments",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "departments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deleteDepartment",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/departments/6",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "departments",
+                "6"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "employees",
+      "item": [
+        {
+          "name": "Validation Tests",
+          "item": [
+            {
+              "name": "Missing Name",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"john@example.com\",\r\n    \"phone\": \"01012345678\",\r\n    \"hireDate\": \"2026-07-16T09:00:00\",\r\n    \"salary\": 10000,\r\n    \"departmentId\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{api_url}}:{{api_port}}/api/v1/employees",
+                  "host": [
+                    "{{api_url}}"
+                  ],
+                  "port": "{{api_port}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Invalid Email",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"email\": \"invalid-email\",\r\n    \"phone\": \"01012345678\",\r\n    \"hireDate\": \"2026-07-16T09:00:00\",\r\n    \"salary\": 10000,\r\n    \"departmentId\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{api_url}}:{{api_port}}/api/v1/employees",
+                  "host": [
+                    "{{api_url}}"
+                  ],
+                  "port": "{{api_port}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Negative Salary",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"email\": \"john@example.com\",\r\n    \"phone\": \"01012345678\",\r\n    \"hireDate\": \"2026-07-16T09:00:00\",\r\n    \"salary\": -5000,\r\n    \"departmentId\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{api_url}}:{{api_port}}/api/v1/employees",
+                  "host": [
+                    "{{api_url}}"
+                  ],
+                  "port": "{{api_port}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Missing Department",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"email\": \"john@example.com\",\r\n    \"phone\": \"01012345678\",\r\n    \"hireDate\": \"2026-07-16T09:00:00\",\r\n    \"salary\": 10000\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{api_url}}:{{api_port}}/api/v1/employees",
+                  "host": [
+                    "{{api_url}}"
+                  ],
+                  "port": "{{api_port}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Non-Existing Department",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"email\": \"john@example.com\",\r\n    \"phone\": \"01012345678\",\r\n    \"hireDate\": \"2026-07-16T09:00:00\",\r\n    \"salary\": 10000,\r\n    \"departmentId\": 999\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{api_url}}:{{api_port}}/api/v1/employees",
+                  "host": [
+                    "{{api_url}}"
+                  ],
+                  "port": "{{api_port}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "employees"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "createEmployee",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Michael Johnson\",\r\n    \"email\": \"michael.johnson@example.com\",\r\n    \"phone\": \"01255555555\",\r\n    \"hireDate\": \"2024-01-15T08:15:00\",\r\n    \"salary\": 18000,\r\n    \"departmentId\": 3\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/employees",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "employees"
+              ]
+            },
+            "description": "Generated from cURL: curl -X POST \"{{api_url}}:{{api_port}}/api/v1/employees\" -H \"Content-Type: application/json\" -d '{\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john.doe@company.com\",\"phone\":\"01012345678\",\"hireDate\":\"2024-01-15\",\"salary\":75000,\"departmentId\":1}'"
+          },
+          "response": []
+        },
+        {
+          "name": "updateEmployee",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"John Doe Updated\",\r\n    \"email\": \"john.updated@example.com\",\r\n    \"phone\": \"01099998888\",\r\n    \"hireDate\": \"2026-07-16T09:00:00\",\r\n    \"salary\": 15000,\r\n    \"departmentId\": 2\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/employees/1",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                "1"
+              ]
+            },
+            "description": "Generated from cURL: curl -X PUT \"{{api_url}}:{{api_port}}/api/v1/employees/1\" -H \"Content-Type: application/json\" -d '{\"firstName\":\"Jane\",\"lastName\":\"Smith\",\"email\":\"jane.smith@company.com\",\"phone\":\"01098765432\",\"salary\":85000.0,\"departmentId\":2}'"
+          },
+          "response": []
+        },
+        {
+          "name": "getEmployeeById",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/employees/1",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                "1"
+              ]
+            },
+            "description": "Generated from cURL: curl -X GET \"{{api_url}}:{{api_port}}/api/v1/employees/1\""
+          },
+          "response": []
+        },
+        {
+          "name": "getAllEmployees",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/employees",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "employees"
+              ]
+            },
+            "description": "Generated from cURL: curl -X GET \"{{api_url}}:{{api_port}}/api/v1/employees\""
+          },
+          "response": []
+        },
+        {
+          "name": "getEmployeesByDepartment",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/employees/department/2",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                "department",
+                "2"
+              ]
+            },
+            "description": "Generated from cURL: curl -X GET \"{{api_url}}:{{api_port}}/api/v1/employees/1\""
+          },
+          "response": []
+        },
+        {
+          "name": "assignDepartment",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/employees/1/department/3",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                "1",
+                "department",
+                "3"
+              ]
+            },
+            "description": "Generated from cURL: curl -X GET \"{{api_url}}:{{api_port}}/api/v1/employees/1\""
+          },
+          "response": []
+        },
+        {
+          "name": "deleteEmployee",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/employees/1",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "employees",
+                "1"
+              ]
+            },
+            "description": "Generated from cURL: curl -X DELETE \"{{api_url}}:{{api_port}}/api/v1/employees/1\""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "projects",
+      "item": [
+        {
+          "name": "Validation Tests",
+          "item": [
+            {
+              "name": "Missing name",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"description\": \"Test project\",\r\n  \"startDate\": \"2026-07-16T09:00:00\",\r\n  \"endDate\": \"2026-10-16T17:00:00\",\r\n  \"departmentId\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{api_url}}:{{api_port}}/api/v1/projects",
+                  "host": [
+                    "{{api_url}}"
+                  ],
+                  "port": "{{api_port}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "projects"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X POST \"{{api_url}}:{{api_port}}/api/v1/projects\" -H \"Content-Type: application/json\" -d '{\"budget\":60000}'"
+              },
+              "response": []
+            },
+            {
+              "name": "Missing department",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Test Project\",\r\n  \"description\": \"Testing validation\",\r\n  \"startDate\": \"2026-07-16T09:00:00\",\r\n  \"endDate\": \"2026-10-16T17:00:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{api_url}}:{{api_port}}/api/v1/projects",
+                  "host": [
+                    "{{api_url}}"
+                  ],
+                  "port": "{{api_port}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "projects"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X POST \"{{api_url}}:{{api_port}}/api/v1/projects\" -H \"Content-Type: application/json\" -d '{\"budget\":60000}'"
+              },
+              "response": []
+            },
+            {
+              "name": "Non-existing department",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Ghost Project\",\r\n  \"description\": \"Department does not exist\",\r\n  \"startDate\": \"2026-07-16T09:00:00\",\r\n  \"endDate\": \"2026-10-16T17:00:00\",\r\n  \"departmentId\": 999\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{api_url}}:{{api_port}}/api/v1/projects",
+                  "host": [
+                    "{{api_url}}"
+                  ],
+                  "port": "{{api_port}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "projects"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X POST \"{{api_url}}:{{api_port}}/api/v1/projects\" -H \"Content-Type: application/json\" -d '{\"name\":\"\",\"description\":\"\",\"startDate\":\"2024-01-15\",\"endDate\":\"2024-12-31\",\"budget\":50000,\"departmentId\":1}'"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "createProject",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Employee Management System\",\r\n  \"description\": \"Developing a REST API using Spring Boot\",\r\n  \"startDate\": \"2026-07-16T09:00:00\",\r\n  \"endDate\": \"2026-10-31T18:00:00\",\r\n  \"departmentId\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/projects",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "projects"
+              ]
+            },
+            "description": "Generated from cURL: curl -X POST \"{{api_url}}:{{api_port}}/api/v1/projects\" -H \"Content-Type: application/json\" -d '{\"name\":\"Project Alpha\",\"description\":\"A new project\",\"startDate\":\"2024-01-15\",\"endDate\":\"2024-12-31\",\"budget\":100000,\"departmentId\":1}'"
+          },
+          "response": []
+        },
+        {
+          "name": "updateProject",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Employee Management System v2\",\r\n  \"description\": \"Added reporting and notification modules\",\r\n  \"startDate\": \"2026-07-16T09:00:00\",\r\n  \"endDate\": \"2026-11-30T18:00:00\",\r\n  \"departmentId\": 2\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/projects/1",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "projects",
+                "1"
+              ]
+            },
+            "description": "Generated from cURL: curl -X PUT \"{{api_url}}:{{api_port}}/api/v1/projects/1\" -H \"Content-Type: application/json\" -d '{\"name\":\"Project Alpha Updated\",\"description\":\"Updated description\",\"startDate\":\"2024-01-15\",\"endDate\":\"2025-06-30\",\"budget\":150000.0,\"departmentId\":2}'"
+          },
+          "response": []
+        },
+        {
+          "name": "getProjectById",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/projects/1",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "projects",
+                "1"
+              ]
+            },
+            "description": "Generated from cURL: curl -X GET \"{{api_url}}:{{api_port}}/api/v1/projects/1\""
+          },
+          "response": []
+        },
+        {
+          "name": "getAllProjects",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/projects",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "projects"
+              ]
+            },
+            "description": "Generated from cURL: curl -X GET \"{{api_url}}:{{api_port}}/api/v1/projects\""
+          },
+          "response": []
+        },
+        {
+          "name": "deleteProject",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/projects/1",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "projects",
+                "1"
+              ]
+            },
+            "description": "Generated from cURL: curl -X DELETE \"{{api_url}}:{{api_port}}/api/v1/projects/1\""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "employee_project",
+      "item": [
+        {
+          "name": "Validation Tests",
+          "item": [
+            {
+              "name": "Missing role",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{api_url}}:{{api_port}}/api/v1/employee-projects/employees/4/projects/3",
+                  "host": [
+                    "{{api_url}}"
+                  ],
+                  "port": "{{api_port}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "employee-projects",
+                    "employees",
+                    "4",
+                    "projects",
+                    "3"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X POST \"{{api_url}}:{{api_port}}/api/v1/projects\" -H \"Content-Type: application/json\" -d '{\"budget\":60000}'"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "assignEmployeeToProject",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"role\": \"ANALYST\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/employee-projects/employees/4/projects/3",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "employee-projects",
+                "employees",
+                "4",
+                "projects",
+                "3"
+              ]
+            },
+            "description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/v1/employee-projects/employees/{{employeeId}}/projects/{{projectId}}\""
+          },
+          "response": []
+        },
+        {
+          "name": "updateEmployeeProject",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"role\": \"DEVELOPER\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/employee-projects/employees/2/projects/2",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "employee-projects",
+                "employees",
+                "2",
+                "projects",
+                "2"
+              ]
+            },
+            "description": "Generated from cURL: curl -X PUT \"http://localhost:8080/api/v1/employee-projects/employees/{{employeeId}}/projects/{{projectId}}\" -H \"Content-Type: application/json\""
+          },
+          "response": []
+        },
+        {
+          "name": "getEmployeeProject",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/employee-projects/employees/1/projects/2",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "employee-projects",
+                "employees",
+                "1",
+                "projects",
+                "2"
+              ]
+            },
+            "description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/v1/employee-projects/employees/{{employeeId}}/projects/{{projectId}}\" -H \"Content-Type: application/json\""
+          },
+          "response": []
+        },
+        {
+          "name": "getAllEmployeeProjects",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/employee-projects",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "employee-projects"
+              ]
+            },
+            "description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/v1/employee-projects/employees/{{employeeId}}/projects/{{projectId}}\" -H \"Content-Type: application/json\""
+          },
+          "response": []
+        },
+        {
+          "name": "removeEmployeeFromProject",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false
+              }
+            ],
+            "url": {
+              "raw": "{{api_url}}:{{api_port}}/api/v1/employee-projects/employees/4/projects/3",
+              "host": [
+                "{{api_url}}"
+              ],
+              "port": "{{api_port}}",
+              "path": [
+                "api",
+                "v1",
+                "employee-projects",
+                "employees",
+                "4",
+                "projects",
+                "3"
+              ]
+            },
+            "description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/v1/employee-projects/employees/{{employeeId}}/projects/{{projectId}}\" -H \"Content-Type: application/json\""
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "api_url",
+      "value": ""
+    },
+    {
+      "key": "api_port",
+      "value": ""
+    }
+  ]
+}
