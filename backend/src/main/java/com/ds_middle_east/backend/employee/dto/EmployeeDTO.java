@@ -38,6 +38,7 @@ public class EmployeeDTO {
     @NotNull(message = "Hire date is required")
     private LocalDateTime hireDate;
 
+    @NotNull(message = "Salary is required")
     @Positive(message = "Salary must be positive")
     private Double salary;
 
