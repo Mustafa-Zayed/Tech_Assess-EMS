@@ -8,9 +8,6 @@ export const routes: Routes = [
   },
   {
     path: 'departments',
-    loadComponent: () =>
-      import('./components/departments/department-list.component').then(
-        (m) => m.DepartmentListComponent,
-      ),
+    loadChildren: () => import('./components/departments/departments.routes').then((m) => m.routes),
   },
 ];

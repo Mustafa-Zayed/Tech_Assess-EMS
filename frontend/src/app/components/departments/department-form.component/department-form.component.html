@@ -1,0 +1,86 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header">
+      <h3 class="mb-0">
+        {{ isEditMode() ? 'Edit Department' : 'Create Department' }}
+      </h3>
+    </div>
+
+    <div class="card-body">
+      @if (loading()) {
+        <div class="text-center my-4">
+          <div class="spinner-border text-primary"></div>
+        </div>
+      }
+
+      @if (!loading()) {
+        <div>
+          @if (errorMessage()) {
+            <div class="alert alert-danger">
+              {{ errorMessage() }}
+            </div>
+          }
+
+          <form [formGroup]="departmentForm" (ngSubmit)="saveDepartment()">
+            <div class="mb-3">
+              <label class="form-label"> Name </label>
+              <input type="text" class="form-control" formControlName="name" />
+
+              @if (f.name.touched && f.name.invalid) {
+                <div class="text-danger mt-1">
+                  @if (f.name.errors?.['required']) {
+                    <small> Name is required. </small>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label"> Location </label>
+              <input type="text" class="form-control" formControlName="location" />
+
+              @if (f.location.touched && f.location.invalid) {
+                <div class="text-danger mt-1">
+                  @if (f.location.errors?.['required']) {
+                    <small> Location is required. </small>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label"> Budget </label>
+              <input type="number" class="form-control" formControlName="budget" />
+
+              @if (f.budget.touched && f.budget.invalid) {
+                <div class="text-danger mt-1">
+                  @if (f.budget.errors?.['required']) {
+                    <small> Budget is required. </small>
+                  }
+                  @if (f.budget.errors?.['min']) {
+                    <small> Budget must be a positive number. </small>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="d-flex gap-2">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="departmentForm.invalid || saving()"
+              >
+                @if (saving()) {
+                  <span class="spinner-border spinner-border-sm me-2"> </span>
+                }
+                {{ isEditMode() ? 'Update' : 'Create' }}
+              </button>
+
+              <a routerLink="/departments" class="btn btn-secondary"> Cancel </a>
+            </div>
+          </form>
+        </div>
+      }
+    </div>
+  </div>
+</div>

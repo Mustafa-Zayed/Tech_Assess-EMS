@@ -1,9 +1,9 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DepartmentService } from '../../services/department.service';
-import { DepartmentDTO } from '../../models/department.dto';
-import { Response } from '../../models/response.dto';
+import { DepartmentService } from '../../../services/department.service';
+import { DepartmentDTO } from '../../../models/department.dto';
+import { Response } from '../../../models/response.dto';
 import { Subscription } from 'rxjs';
 import { RouterLink } from '@angular/router';
 
@@ -11,8 +11,9 @@ import { RouterLink } from '@angular/router';
   selector: 'app-department-list',
   imports: [CommonModule, RouterLink],
   templateUrl: './department-list.component.html',
+  styleUrls: ['./department-list.component.css'],
 })
-export class DepartmentListComponent implements OnInit {
+export class DepartmentListComponent {
   private departmentService = inject(DepartmentService);
 
   departments = signal<DepartmentDTO[]>([]);
