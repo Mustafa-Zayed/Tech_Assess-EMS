@@ -2,7 +2,7 @@
   <div class="card shadow">
     <div class="card-header">
       <h3 class="mb-0">
-        {{ isEditMode() ? 'Edit Employee' : 'Create Employee' }}
+        {{ isEditMode() ? 'Edit Project' : 'Create Project' }}
       </h3>
     </div>
 
@@ -21,7 +21,7 @@
             </div>
           }
 
-          <form [formGroup]="employeeForm" (ngSubmit)="saveEmployee()">
+          <form [formGroup]="projectForm" (ngSubmit)="saveProject()">
             <div class="mb-3">
               <label class="form-label">Name</label>
               <input type="text" class="form-control" formControlName="name" />
@@ -36,60 +36,39 @@
             </div>
 
             <div class="mb-3">
-              <label class="form-label">Email</label>
-              <input type="email" class="form-control" formControlName="email" />
+              <label class="form-label">Description</label>
+              <textarea class="form-control" rows="4" formControlName="description"></textarea>
 
-              @if (f.email.touched && f.email.invalid) {
+              @if (f.description.touched && f.description.invalid) {
                 <div class="text-danger mt-1">
-                  @if (f.email.errors?.['required']) {
-                    <small>Email is required.</small>
-                  }
-
-                  @if (f.email.errors?.['email']) {
-                    <small>Invalid email address.</small>
+                  @if (f.description.errors?.['required']) {
+                    <small>Description is required.</small>
                   }
                 </div>
               }
             </div>
 
             <div class="mb-3">
-              <label class="form-label">Phone</label>
-              <input type="text" class="form-control" formControlName="phone" />
+              <label class="form-label">Start Date</label>
+              <input type="date" class="form-control" formControlName="startDate" />
 
-              @if (f.phone.touched && f.phone.invalid) {
+              @if (f.startDate.touched && f.startDate.invalid) {
                 <div class="text-danger mt-1">
-                  @if (f.phone.errors?.['required']) {
-                    <small>Phone is required.</small>
+                  @if (f.startDate.errors?.['required']) {
+                    <small>Start date is required.</small>
                   }
                 </div>
               }
             </div>
 
             <div class="mb-3">
-              <label class="form-label">Hire Date</label>
-              <input type="date" class="form-control" formControlName="hireDate" />
+              <label class="form-label">End Date</label>
+              <input type="date" class="form-control" formControlName="endDate" />
 
-              @if (f.hireDate.touched && f.hireDate.invalid) {
+              @if (f.endDate.touched && f.endDate.invalid) {
                 <div class="text-danger mt-1">
-                  @if (f.hireDate.errors?.['required']) {
-                    <small>Hire date is required.</small>
-                  }
-                </div>
-              }
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Salary</label>
-              <input type="number" class="form-control" formControlName="salary" />
-
-              @if (f.salary.touched && f.salary.invalid) {
-                <div class="text-danger mt-1">
-                  @if (f.salary.errors?.['required']) {
-                    <small>Salary is required.</small>
-                  }
-
-                  @if (f.salary.errors?.['min']) {
-                    <small>Salary must be a positive number.</small>
+                  @if (f.endDate.errors?.['required']) {
+                    <small>End date is required.</small>
                   }
                 </div>
               }
@@ -100,7 +79,7 @@
               <select class="form-select" formControlName="departmentId">
                 <option [value]="0">Select Department</option>
 
-                @for (department of departments(); track $index) {
+                @for (department of departments(); track department.id) {
                   <option [value]="department.id">
                     {{ department.name }}
                   </option>
@@ -118,7 +97,7 @@
               <button
                 type="submit"
                 class="btn btn-primary"
-                [disabled]="employeeForm.invalid || saving()"
+                [disabled]="projectForm.invalid || saving()"
               >
                 @if (saving()) {
                   <span class="spinner-border spinner-border-sm me-2"></span>
@@ -127,7 +106,7 @@
                 {{ isEditMode() ? 'Update' : 'Create' }}
               </button>
 
-              <a routerLink="/employees" class="btn btn-secondary"> Cancel </a>
+              <a routerLink="/projects" class="btn btn-secondary"> Cancel </a>
             </div>
           </form>
         </div>

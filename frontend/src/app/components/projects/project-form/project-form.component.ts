@@ -3,22 +3,23 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
-import { EmployeeService } from '../../../services/employee.service';
+import { ProjectService } from '../../../services/project.service';
 import { DepartmentService } from '../../../services/department.service';
 
-import { EmployeeDTO } from '../../../models/employee.dto';
+import { ProjectDTO } from '../../../models/project.dto';
 import { DepartmentDTO } from '../../../models/department.dto';
+
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-employee-form',
+  selector: 'app-project-form',
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
-  templateUrl: './employee-form.component.html',
-  styleUrl: './employee-form.component.css',
+  templateUrl: './project-form.component.html',
+  styleUrl: './project-form.component.css',
 })
-export class EmployeeFormComponent {
+export class ProjectFormComponent {
   private fb = inject(FormBuilder);
-  private employeeService = inject(EmployeeService);
+  private projectService = inject(ProjectService);
   private departmentService = inject(DepartmentService);
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
@@ -26,7 +27,7 @@ export class EmployeeFormComponent {
   private subscriptions: Subscription[] = [];
 
   isEditMode = signal(false);
-  employeeId!: number;
+  projectId!: number;
 
   loading = signal(false);
   saving = signal(false);
@@ -34,12 +35,11 @@ export class EmployeeFormComponent {
 
   departments = signal<DepartmentDTO[]>([]);
 
-  employeeForm = this.fb.nonNullable.group({
-    name: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    phone: ['', [Validators.required]],
-    hireDate: ['', [Validators.required]],
-    salary: [1, [Validators.required, Validators.min(1)]],
+  projectForm = this.fb.nonNullable.group({
+    name: ['', Validators.required],
+    description: ['', Validators.required],
+    startDate: ['', Validators.required],
+    endDate: ['', Validators.required],
     departmentId: [0, [Validators.required, Validators.min(1)]],
   });
 
@@ -50,8 +50,8 @@ export class EmployeeFormComponent {
 
     if (id) {
       this.isEditMode.set(true);
-      this.employeeId = Number(id);
-      this.loadEmployee();
+      this.projectId = Number(id);
+      this.loadProject();
     }
   }
 
@@ -64,75 +64,80 @@ export class EmployeeFormComponent {
         this.errorMessage.set(err.error?.message ?? 'Failed to load departments.');
       },
     });
+
     this.subscriptions.push(sub);
   }
 
-  loadEmployee(): void {
+  loadProject(): void {
     this.loading.set(true);
     this.errorMessage.set('');
 
-    const sub = this.employeeService.getEmployeeById(this.employeeId).subscribe({
+    const sub = this.projectService.getProjectById(this.projectId).subscribe({
       next: (response) => {
         this.loading.set(false);
 
-        this.employeeForm.patchValue({
+        this.projectForm.patchValue({
           name: response.data.name,
-          email: response.data.email,
-          phone: response.data.phone,
-          hireDate: response.data.hireDate.substring(0, 10), // get only the date part, ignoring the time
-          salary: response.data.salary,
+          description: response.data.description,
+          startDate: response.data.startDate.substring(0, 10),
+          endDate: response.data.endDate.substring(0, 10),
           departmentId: response.data.departmentId,
         });
       },
       error: (err) => {
         this.loading.set(false);
-        this.errorMessage.set(err.error?.message ?? 'Failed to load employee.');
+        this.errorMessage.set(err.error?.message ?? 'Failed to load project.');
       },
     });
+
     this.subscriptions.push(sub);
   }
 
-  saveEmployee(): void {
-    if (this.employeeForm.invalid) {
-      this.employeeForm.markAllAsTouched();
+  saveProject(): void {
+    if (this.projectForm.invalid) {
+      this.projectForm.markAllAsTouched();
       return;
     }
 
     this.saving.set(true);
     this.errorMessage.set('');
 
-    const employee: EmployeeDTO = this.employeeForm.getRawValue();
-    employee.hireDate = `${employee.hireDate}T00:00:00`;
+    const project: ProjectDTO = this.projectForm.getRawValue();
+
+    project.startDate = `${project.startDate}T00:00:00`;
+    project.endDate = `${project.endDate}T00:00:00`;
 
     if (this.isEditMode()) {
-      const sub = this.employeeService.updateEmployee(this.employeeId, employee).subscribe({
+      const sub = this.projectService.updateProject(this.projectId, project).subscribe({
         next: () => {
           this.saving.set(false);
-          this.router.navigate(['/employees']);
+          this.router.navigate(['/projects']);
         },
         error: (err) => {
           this.saving.set(false);
-          this.errorMessage.set(err.error?.message ?? 'Failed to update employee.');
+          this.errorMessage.set(err.error?.message ?? 'Failed to update project.');
         },
       });
+
       this.subscriptions.push(sub);
     } else {
-      const sub = this.employeeService.createEmployee(employee).subscribe({
+      const sub = this.projectService.createProject(project).subscribe({
         next: () => {
           this.saving.set(false);
-          this.router.navigate(['/employees']);
+          this.router.navigate(['/projects']);
         },
         error: (err) => {
           this.saving.set(false);
-          this.errorMessage.set(err.error?.message ?? 'Failed to create employee.');
+          this.errorMessage.set(err.error?.message ?? 'Failed to create project.');
         },
       });
+
       this.subscriptions.push(sub);
     }
   }
 
   get f() {
-    return this.employeeForm.controls;
+    return this.projectForm.controls;
   }
 
   ngOnDestroy(): void {
