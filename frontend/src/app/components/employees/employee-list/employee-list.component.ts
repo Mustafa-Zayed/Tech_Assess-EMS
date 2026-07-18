@@ -1,6 +1,5 @@
-import { Component, OnInit, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 import { EmployeeService } from '../../../services/employee.service';
@@ -9,11 +8,11 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-employee-list',
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, RouterLink],
   templateUrl: './employee-list.component.html',
   styleUrl: './employee-list.component.css',
 })
-export class EmployeeListComponent implements OnInit {
+export class EmployeeListComponent {
   private employeeService = inject(EmployeeService);
 
   employees = signal<EmployeeDTO[]>([]);
@@ -31,7 +30,7 @@ export class EmployeeListComponent implements OnInit {
     this.loading.set(true);
     this.errorMessage.set('');
 
-    this.employeeService.getAllEmployees().subscribe({
+    const sub = this.employeeService.getAllEmployees().subscribe({
       next: (response) => {
         this.loading.set(false);
         this.employees.set(response.data);
@@ -42,10 +41,11 @@ export class EmployeeListComponent implements OnInit {
         this.errorMessage.set(err.error?.message ?? 'Failed to load employees.');
       },
     });
+    this.subscriptions.push(sub);
   }
 
   deleteEmployee(departmentId: number) {
-    this.employeeService.deleteEmployee(departmentId).subscribe({
+    const sub = this.employeeService.deleteEmployee(departmentId).subscribe({
       next: (response) => {
         this.loadEmployees();
       },
@@ -53,5 +53,10 @@ export class EmployeeListComponent implements OnInit {
         this.errorMessage.set(err.error?.message ?? 'Something went wrong while deleting employee');
       },
     });
+    this.subscriptions.push(sub);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 }

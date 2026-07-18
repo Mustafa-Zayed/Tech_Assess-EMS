@@ -1,9 +1,10 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DepartmentService } from '../../../services/department.service';
 import { DepartmentDTO } from '../../../models/department.dto';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-department-form',
@@ -11,11 +12,13 @@ import { DepartmentDTO } from '../../../models/department.dto';
   templateUrl: './department-form.component.html',
   styleUrl: './department-form.component.css',
 })
-export class DepartmentFormComponent implements OnInit {
+export class DepartmentFormComponent {
   private fb = inject(FormBuilder);
   private departmentService = inject(DepartmentService);
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
+
+  private subscriptions: Subscription[] = [];
 
   isEditMode = signal<boolean>(false);
   departmentId!: number;
@@ -44,7 +47,7 @@ export class DepartmentFormComponent implements OnInit {
     this.loading.set(true);
     this.errorMessage.set('');
 
-    this.departmentService.getDepartmentById(this.departmentId).subscribe({
+    const sub = this.departmentService.getDepartmentById(this.departmentId).subscribe({
       next: (response) => {
         this.loading.set(false);
 
@@ -60,6 +63,7 @@ export class DepartmentFormComponent implements OnInit {
         this.errorMessage.set(err.error?.message ?? 'Failed to load department.');
       },
     });
+    this.subscriptions.push(sub);
   }
 
   saveDepartment(): void {
@@ -74,7 +78,7 @@ export class DepartmentFormComponent implements OnInit {
     const department: DepartmentDTO = this.departmentForm.getRawValue();
 
     if (this.isEditMode()) {
-      this.departmentService.updateDepartment(this.departmentId, department).subscribe({
+      const sub = this.departmentService.updateDepartment(this.departmentId, department).subscribe({
         next: () => {
           this.saving.set(false);
           this.router.navigate(['/departments']);
@@ -85,8 +89,9 @@ export class DepartmentFormComponent implements OnInit {
           this.errorMessage.set(err.error?.message ?? 'Failed to update department.');
         },
       });
+      this.subscriptions.push(sub);
     } else {
-      this.departmentService.createDepartment(department).subscribe({
+      const sub = this.departmentService.createDepartment(department).subscribe({
         next: () => {
           this.saving.set(false);
           this.router.navigate(['/departments']);
@@ -97,10 +102,15 @@ export class DepartmentFormComponent implements OnInit {
           this.errorMessage.set(err.error?.message ?? 'Failed to create department.');
         },
       });
+      this.subscriptions.push(sub);
     }
   }
 
   get f() {
     return this.departmentForm.controls;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 }

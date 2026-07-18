@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DepartmentService } from '../../../services/department.service';
@@ -54,7 +54,7 @@ export class DepartmentListComponent {
   }
 
   deleteDepartment(departmentId: number) {
-    this.departmentService.deleteDepartment(departmentId).subscribe({
+    const sub = this.departmentService.deleteDepartment(departmentId).subscribe({
       next: (response: Response<void>) => {
         this.loadDepartments();
       },
@@ -64,6 +64,7 @@ export class DepartmentListComponent {
         );
       },
     });
+    this.subscriptions.push(sub);
   }
 
   ngOnDestroy(): void {
