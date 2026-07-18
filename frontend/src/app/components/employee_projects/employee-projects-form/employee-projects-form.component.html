@@ -1,0 +1,94 @@
+<div class="container my-4">
+  <div class="card shadow">
+    <div class="card-header">
+      <h3 class="mb-0">
+        {{ isEditMode() ? 'Edit Employee Project' : 'Assign Employee to Project' }}
+      </h3>
+    </div>
+
+    <div class="card-body">
+      @if (loading()) {
+        <div class="text-center my-4">
+          <div class="spinner-border text-primary"></div>
+        </div>
+      }
+
+      @if (!loading()) {
+        <div>
+          @if (errorMessage()) {
+            <div class="alert alert-danger">
+              {{ errorMessage() }}
+            </div>
+          }
+
+          <form [formGroup]="employeeProjectForm" (ngSubmit)="saveEmployeeProject()">
+            <div class="mb-3">
+              <label class="form-label">Employee</label>
+              <select class="form-select" formControlName="employeeId">
+                <option [value]="0">Select Employee</option>
+
+                @for (employee of employees(); track employee.id) {
+                  <option [value]="employee.id">
+                    {{ employee.name }}
+                  </option>
+                }
+              </select>
+
+              @if (f.employeeId.touched && f.employeeId.invalid) {
+                <div class="text-danger mt-1">
+                  <small>Please select an employee.</small>
+                </div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Project</label>
+              <select class="form-select" formControlName="projectId">
+                <option [value]="0">Select Project</option>
+
+                @for (project of projects(); track project.id) {
+                  <option [value]="project.id">
+                    {{ project.name }}
+                  </option>
+                }
+              </select>
+
+              @if (f.projectId.touched && f.projectId.invalid) {
+                <div class="text-danger mt-1">
+                  <small>Please select a project.</small>
+                </div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Role</label>
+              <select class="form-select" formControlName="role">
+                @for (role of roles; track role) {
+                  <option [value]="role">
+                    {{ role }}
+                  </option>
+                }
+              </select>
+            </div>
+
+            <div class="d-flex gap-2">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="employeeProjectForm.invalid || saving()"
+              >
+                @if (saving()) {
+                  <span class="spinner-border spinner-border-sm me-2"></span>
+                }
+
+                {{ isEditMode() ? 'Update' : 'Assign' }}
+              </button>
+
+              <a routerLink="/employee-projects" class="btn btn-secondary"> Cancel </a>
+            </div>
+          </form>
+        </div>
+      }
+    </div>
+  </div>
+</div>
