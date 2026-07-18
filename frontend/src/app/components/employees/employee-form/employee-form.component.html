@@ -1,0 +1,140 @@
+<div class="container my-4">
+  <div class="card shadow">
+    <div class="card-header">
+      <h3 class="mb-0">
+        {{ isEditMode() ? 'Edit Employee' : 'Create Employee' }}
+      </h3>
+    </div>
+
+    <div class="card-body">
+      @if (loading()) {
+        <div class="text-center my-4">
+          <div class="spinner-border text-primary"></div>
+        </div>
+      }
+
+      @if (!loading()) {
+        <div>
+          @if (errorMessage()) {
+            <div class="alert alert-danger">
+              {{ errorMessage() }}
+            </div>
+          }
+
+          <form [formGroup]="employeeForm" (ngSubmit)="saveEmployee()">
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" formControlName="name" />
+
+              @if (f.name.touched && f.name.invalid) {
+                <div class="text-danger mt-1">
+                  @if (f.name.errors?.['required']) {
+                    <small>Name is required.</small>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" formControlName="email" />
+
+              @if (f.email.touched && f.email.invalid) {
+                <div class="text-danger mt-1">
+                  @if (f.email.errors?.['required']) {
+                    <small>Email is required.</small>
+                  }
+
+                  @if (f.email.errors?.['email']) {
+                    <small>Invalid email address.</small>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Phone</label>
+              <input type="text" class="form-control" formControlName="phone" />
+
+              @if (f.phone.touched && f.phone.invalid) {
+                <div class="text-danger mt-1">
+                  @if (f.phone.errors?.['required']) {
+                    <small>Phone is required.</small>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Hire Date</label>
+              <input type="date" class="form-control" formControlName="hireDate" />
+
+              @if (f.hireDate.touched && f.hireDate.invalid) {
+                <div class="text-danger mt-1">
+                  @if (f.hireDate.errors?.['required']) {
+                    <small>Hire date is required.</small>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Salary</label>
+              <input type="number" class="form-control" formControlName="salary" />
+
+              @if (f.salary.touched && f.salary.invalid) {
+                <div class="text-danger mt-1">
+                  @if (f.salary.errors?.['required']) {
+                    <small>Salary is required.</small>
+                  }
+
+                  @if (f.salary.errors?.['min']) {
+                    <small>Salary must be a positive number.</small>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Department</label>
+
+              <select class="form-select" formControlName="departmentId">
+                <option [value]="0">Select Department</option>
+
+                @for (department of departments(); track $index) {
+                  <option [value]="department.id">
+                    {{ department.name }}
+                  </option>
+                }
+              </select>
+
+              @if (f.departmentId.touched && f.departmentId.invalid) {
+                <div class="text-danger mt-1">
+                  @if (f.departmentId.errors?.['required']) {
+                    <small>Please select a department.</small>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="d-flex gap-2">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="employeeForm.invalid || saving()"
+              >
+                @if (saving()) {
+                  <span class="spinner-border spinner-border-sm me-2"></span>
+                }
+
+                {{ isEditMode() ? 'Update' : 'Create' }}
+              </button>
+
+              <a routerLink="/employees" class="btn btn-secondary"> Cancel </a>
+            </div>
+          </form>
+        </div>
+      }
+    </div>
+  </div>
+</div>
