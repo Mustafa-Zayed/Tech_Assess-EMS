@@ -1,14 +1,15 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 import { EmployeeService } from '../../../services/employee.service';
 import { EmployeeDTO } from '../../../models/employee.dto';
 import { Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-employee-list',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './employee-list.component.html',
   styleUrl: './employee-list.component.css',
 })
@@ -21,6 +22,26 @@ export class EmployeeListComponent {
 
   loading = signal(false);
   errorMessage = signal('');
+
+  searchTerm = signal('');
+
+  filteredEmployees = computed(() => {
+    const term = this.searchTerm().trim().toLowerCase();
+
+    if (!term) {
+      return this.employees();
+    }
+
+    return this.employees().filter(
+      (employee) =>
+        employee.name.toLowerCase().includes(term) ||
+        employee.email.toLowerCase().includes(term) ||
+        employee.phone.toLowerCase().includes(term) ||
+        employee.hireDate.toLowerCase().includes(term) ||
+        employee.salary.toString().toLowerCase().includes(term) ||
+        employee.departmentName?.toLowerCase().includes(term),
+    );
+  });
 
   ngOnInit(): void {
     this.loadEmployees();

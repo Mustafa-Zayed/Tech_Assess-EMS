@@ -1,14 +1,15 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { ProjectService } from '../../../services/project.service';
 import { ProjectDTO } from '../../../models/project.dto';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-project-list',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './project-list.component.html',
   styleUrl: './project-list.component.css',
 })
@@ -21,6 +22,25 @@ export class ProjectListComponent {
 
   loading = signal(false);
   errorMessage = signal('');
+
+  searchTerm = signal('');
+
+  filteredProjects = computed(() => {
+    const term = this.searchTerm().trim().toLowerCase();
+
+    if (!term) {
+      return this.projects();
+    }
+
+    return this.projects().filter(
+      (project) =>
+        project.name.toLowerCase().includes(term) ||
+        project.description.toLowerCase().includes(term) ||
+        project.startDate.toLowerCase().includes(term) ||
+        project.endDate.toLowerCase().includes(term) ||
+        project.departmentName?.toLowerCase().includes(term),
+    );
+  });
 
   ngOnInit(): void {
     this.loadProjects();

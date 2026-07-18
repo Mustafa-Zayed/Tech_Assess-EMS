@@ -5,6 +5,15 @@
     <a routerLink="/employee-projects/new" class="btn btn-primary"> Assign Employee </a>
   </div>
 
+  <div class="mb-3">
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Search employee projects..."
+      [(ngModel)]="searchTerm"
+    />
+  </div>
+
   @if (loading()) {
     <div class="text-center my-5">
       <div class="spinner-border text-primary">
@@ -31,7 +40,7 @@
       </thead>
 
       <tbody>
-        @for (employeeProject of employeeProjects(); track $index) {
+        @for (employeeProject of filteredEmployeeProjects(); track $index) {
           <tr>
             <td>{{ employeeProject.employeeName }}</td>
             <td>{{ employeeProject.projectName }}</td>

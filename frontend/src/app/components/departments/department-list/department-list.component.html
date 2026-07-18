@@ -5,6 +5,15 @@
     <a routerLink="/departments/new" class="btn btn-primary"> Create New Department </a>
   </div>
 
+  <div class="mb-3">
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Search departments..."
+      [(ngModel)]="searchTerm"
+    />
+  </div>
+
   @if (loading()) {
     <div class="text-center my-5">
       <div class="spinner-border text-primary">
@@ -32,7 +41,7 @@
       </thead>
 
       <tbody>
-        @for (department of departments(); track department.id) {
+        @for (department of filteredDepartments(); track department.id) {
           <tr>
             <td>{{ department.id }}</td>
             <td>{{ department.name }}</td>

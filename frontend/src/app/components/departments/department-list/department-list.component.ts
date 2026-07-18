@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DepartmentService } from '../../../services/department.service';
@@ -6,10 +6,11 @@ import { DepartmentDTO } from '../../../models/department.dto';
 import { Response } from '../../../models/response.dto';
 import { Subscription } from 'rxjs';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-department-list',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './department-list.component.html',
   styleUrls: ['./department-list.component.css'],
 })
@@ -22,6 +23,24 @@ export class DepartmentListComponent {
 
   loading = signal<boolean>(false);
   errorMessage = signal<string>('');
+
+  searchTerm = signal('');
+
+  filteredDepartments = computed(() => {
+    const term = this.searchTerm().trim().toLowerCase();
+
+    // return all departments, if search term is empty
+    if (!term) {
+      return this.departments();
+    }
+
+    return this.departments().filter(
+      (department) =>
+        department.name.toLowerCase().includes(term) ||
+        department.location.toLowerCase().includes(term) ||
+        department.budget.toString().toLowerCase().includes(term),
+    );
+  });
 
   ngOnInit(): void {
     this.loadDepartments();
@@ -44,9 +63,7 @@ export class DepartmentListComponent {
       error: (err) => {
         this.loading.set(false);
 
-        this.errorMessage.set(
-          err.error?.message ?? 'Something went wrong while loading departments',
-        );
+        this.errorMessage.set(err.error?.message ?? 'Failed to load departments.');
       },
     });
 
