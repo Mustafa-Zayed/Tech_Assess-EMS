@@ -1,5 +1,7 @@
 <div class="container mt-4">
-  <div class="d-flex justify-content-between align-items-center mb-4">
+  <div
+    class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4"
+  >
     <h2 class="mb-0">Projects</h2>
 
     <a routerLink="/projects/new" class="btn btn-primary"> Create New Project </a>
@@ -29,34 +31,73 @@
   }
 
   @if (!loading() && projects().length > 0) {
-    <table class="table table-bordered table-hover table-striped">
-      <thead class="table-dark">
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Department</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+    <!-- Desktop -->
+    <div class="d-none d-md-block">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Department</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
 
-      <tbody>
-        @for (project of filteredProjects(); track project.id) {
-          <tr>
-            <td>{{ project.id }}</td>
-            <td>{{ project.name }}</td>
-            <td>{{ project.description }}</td>
-            <td>{{ project.startDate | date: 'yyyy-MM-dd' }}</td>
-            <td>{{ project.endDate | date: 'yyyy-MM-dd' }}</td>
-            <td>{{ project.departmentName }}</td>
+          <tbody>
+            @for (project of filteredProjects(); track project.id) {
+              <tr>
+                <td>{{ project.id }}</td>
+                <td>{{ project.name }}</td>
+                <td>{{ project.description }}</td>
+                <td>{{ project.startDate | date: 'yyyy-MM-dd' }}</td>
+                <td>{{ project.endDate | date: 'yyyy-MM-dd' }}</td>
+                <td>{{ project.departmentName }}</td>
+                <td>
+                  <div class="d-flex flex-wrap gap-2">
+                    <a
+                      class="btn btn-primary btn-sm me-2"
+                      routerLink="/projects/edit/{{ project.id }}"
+                    >
+                      Edit
+                    </a>
 
-            <td>
-              <a class="btn btn-primary btn-sm me-2" routerLink="/projects/edit/{{ project.id }}">
-                Edit
-              </a>
+                    <button
+                      class="btn btn-danger btn-sm"
+                      (click)="selectedProjectForDeletion = project"
+                      data-bs-toggle="modal"
+                      data-bs-target="#deleteModal"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
 
+    <!-- Mobile -->
+    <div class="d-md-none">
+      @for (project of filteredProjects(); track project.id) {
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="fw-bold">{{ project.name }}</h5>
+            <p><strong>ID:</strong> {{ project.id }}</p>
+            <p><strong>Description:</strong> {{ project.description }}</p>
+            <p><strong>Start Date:</strong> {{ project.startDate | date: 'yyyy-MM-dd' }}</p>
+            <p><strong>End Date:</strong> {{ project.endDate | date: 'yyyy-MM-dd' }}</p>
+            <p><strong>Department:</strong> {{ project.departmentName }}</p>
+
+            <div class="d-grid d-md-flex gap-2">
+              <a class="btn btn-primary btn-sm" routerLink="/projects/edit/{{ project.id }}"
+                >Edit</a
+              >
               <button
                 class="btn btn-danger btn-sm"
                 (click)="selectedProjectForDeletion = project"
@@ -65,11 +106,11 @@
               >
                 Delete
               </button>
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
   }
 </div>
 

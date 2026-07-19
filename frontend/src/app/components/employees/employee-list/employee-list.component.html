@@ -1,5 +1,7 @@
 <div class="container mt-4">
-  <div class="d-flex justify-content-between align-items-center mb-4">
+  <div
+    class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4"
+  >
     <h2 class="mb-0">Employees</h2>
 
     <a routerLink="/employees/new" class="btn btn-primary"> Create New Employee </a>
@@ -29,35 +31,76 @@
   }
 
   @if (!loading() && employees().length > 0) {
-    <table class="table table-bordered table-hover table-striped">
-      <thead class="table-dark">
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>Hire Date</th>
-          <th>Salary</th>
-          <th>Department</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+    <!-- Desktop -->
+    <div class="d-none d-md-block">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Hire Date</th>
+              <th>Salary</th>
+              <th>Department</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
 
-      <tbody>
-        @for (employee of filteredEmployees(); track employee.id) {
-          <tr>
-            <td>{{ employee.id }}</td>
-            <td>{{ employee.name }}</td>
-            <td>{{ employee.email }}</td>
-            <td>{{ employee.phone }}</td>
-            <td>{{ employee.hireDate | date: 'yyyy-MM-dd' }}</td>
-            <td>{{ employee.salary | number }}</td>
-            <td>{{ employee.departmentName }}</td>
-            <td>
-              <a class="btn btn-primary btn-sm me-2" routerLink="/employees/edit/{{ employee.id }}">
-                Edit
-              </a>
+          <tbody>
+            @for (employee of filteredEmployees(); track employee.id) {
+              <tr>
+                <td>{{ employee.id }}</td>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.phone }}</td>
+                <td>{{ employee.hireDate | date: 'yyyy-MM-dd' }}</td>
+                <td>{{ employee.salary | number }}</td>
+                <td>{{ employee.departmentName }}</td>
+                <td>
+                  <div class="d-flex flex-wrap gap-2">
+                    <a
+                      class="btn btn-primary btn-sm me-2"
+                      routerLink="/employees/edit/{{ employee.id }}"
+                    >
+                      Edit
+                    </a>
 
+                    <button
+                      class="btn btn-danger btn-sm"
+                      (click)="this.selectedEmployeeForDeletion = employee"
+                      data-bs-toggle="modal"
+                      data-bs-target="#deleteModal"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Mobile -->
+    <div class="d-md-none">
+      @for (employee of filteredEmployees(); track employee.id) {
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="fw-bold">{{ employee.name }}</h5>
+            <p><strong>ID:</strong> {{ employee.id }}</p>
+            <p><strong>Email:</strong> {{ employee.email }}</p>
+            <p><strong>Phone:</strong> {{ employee.phone }}</p>
+            <p><strong>Hire Date:</strong> {{ employee.hireDate | date: 'yyyy-MM-dd' }}</p>
+            <p><strong>Salary:</strong> {{ employee.salary | number }}</p>
+            <p><strong>Department:</strong> {{ employee.departmentName }}</p>
+
+            <div class="d-grid d-md-flex gap-2">
+              <a class="btn btn-primary btn-sm" routerLink="/employees/edit/{{ employee.id }}"
+                >Edit</a
+              >
               <button
                 class="btn btn-danger btn-sm"
                 (click)="this.selectedEmployeeForDeletion = employee"
@@ -66,11 +109,11 @@
               >
                 Delete
               </button>
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
   }
 </div>
 

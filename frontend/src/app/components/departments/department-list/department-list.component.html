@@ -1,5 +1,7 @@
 <div class="container mt-4">
-  <div class="d-flex justify-content-between align-items-center mb-4">
+  <div
+    class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4"
+  >
     <h2 class="mb-0">Departments</h2>
 
     <a routerLink="/departments/new" class="btn btn-primary"> Create New Department </a>
@@ -29,28 +31,65 @@
   }
 
   @if (!loading() && departments().length > 0) {
-    <table class="table table-bordered table-hover table-striped">
-      <thead class="table-dark">
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Location</th>
-          <th>Budget</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+    <!-- Desktop -->
+    <div class="d-none d-md-block">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Location</th>
+              <th>Budget</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
 
-      <tbody>
-        @for (department of filteredDepartments(); track department.id) {
-          <tr>
-            <td>{{ department.id }}</td>
-            <td>{{ department.name }}</td>
-            <td>{{ department.location }}</td>
-            <td>{{ department.budget | currency: 'EGP' }}</td>
-            <td>
-              <a
-                class="btn btn-primary btn-sm me-2"
-                routerLink="/departments/edit/{{ department.id }}"
+          <tbody>
+            @for (department of filteredDepartments(); track department.id) {
+              <tr>
+                <td>{{ department.id }}</td>
+                <td>{{ department.name }}</td>
+                <td>{{ department.location }}</td>
+                <td>{{ department.budget | currency: 'EGP' }}</td>
+                <td>
+                  <div class="d-flex flex-wrap gap-2">
+                    <a
+                      class="btn btn-primary btn-sm me-2"
+                      routerLink="/departments/edit/{{ department.id }}"
+                      >Edit</a
+                    >
+                    <button
+                      class="btn btn-danger btn-sm"
+                      (click)="this.selectedDepartmentForDeletion = department"
+                      data-bs-toggle="modal"
+                      data-bs-target="#deleteModal"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Mobile -->
+    <div class="d-md-none">
+      @for (department of filteredDepartments(); track department.id) {
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="fw-bold">{{ department.name }}</h5>
+            <p><strong>ID:</strong> {{ department.id }}</p>
+            <p><strong>Location:</strong> {{ department.location }}</p>
+            <p>
+              <strong>Budget:</strong>
+              {{ department.budget | currency: 'EGP' }}
+            </p>
+            <div class="d-grid d-md-flex gap-2">
+              <a class="btn btn-primary btn-sm" routerLink="/departments/edit/{{ department.id }}"
                 >Edit</a
               >
               <button
@@ -61,11 +100,11 @@
               >
                 Delete
               </button>
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
   }
 </div>
 
